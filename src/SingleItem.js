@@ -34,7 +34,7 @@ class SingleItem extends React.Component {
     }
 
     changeCheckedState() {
-        let newValue = this.state.checked ? false : true;
+        let newValue = !this.state.checked;
         this.setState({
             checked: newValue,
             opacity: newValue ? itemCheckedOpacity : itemUncheckedOpacity
