@@ -5,13 +5,13 @@ import SingleItem from './SingleItem';
 
 class ListItems extends React.Component {
     render() {
-        const items = this.props.itemsList.map((item, id) => {
-            const changeItemState = () => { this.props.onItemChange(id); };
-            const removeItem = () => { this.props.onItemRemove(id); };
+        const items = this.props.itemsList.map((item) => {
+            const changeItemState = () => { this.props.onItemChange(item.id); };
+            const removeItem = () => { this.props.onItemRemove(item.id); };
 
             return <SingleItem
-                key={ id }
-                id={ id }
+                key={ item.id }
+                id={ item.id }
                 checked={ item.checked }
                 label={ item.label }
                 onChange={ changeItemState }
@@ -27,7 +27,8 @@ class ListItems extends React.Component {
 
 ListItems.propTypes = {
     onItemChange: PropTypes.func.isRequired,
-    onItemRemove: PropTypes.func.isRequired
+    onItemRemove: PropTypes.func.isRequired,
+    itemsList: PropTypes.array.isRequired
 }
 
 export default ListItems;

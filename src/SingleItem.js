@@ -19,14 +19,22 @@ class SingleItem extends React.Component {
 
         this.state = {
             removingInProgress: false,
-            removingTimeout: 0,
-            removingInterval: 0,
+            removingTimeout: -1,
+            removingInterval: -1,
             opacity: itemUncheckedOpacity,
             checked: false
         }
     }
 
-    changeCheckedState(newValue) {
+    setInitialCheckedState(initialCheckedState) {
+        this.setState({
+            checked: initialCheckedState,
+            opacity: initialCheckedState ? itemCheckedOpacity : itemUncheckedOpacity
+        });
+    }
+
+    changeCheckedState() {
+        let newValue = this.state.checked ? false : true;
         this.setState({
             checked: newValue,
             opacity: newValue ? itemCheckedOpacity : itemUncheckedOpacity
@@ -56,8 +64,7 @@ class SingleItem extends React.Component {
 
     handleChange(id) {
         // Toggle checked state
-        const checked = this.state.checked ? false : true;
-        this.changeCheckedState(checked);
+        this.changeCheckedState();
         // Call parent function to store new value
         this.props.onChange(id);
     }
@@ -66,11 +73,11 @@ class SingleItem extends React.Component {
         const animationIntervalDuration = 200.0;
         const numberOfSteps = removalDuration / animationIntervalDuration;
         const currentOpacity = this.state.opacity;
-        const opacityDecreaseByStep = currentOpacity / numberOfSteps;
+        const opacityDecreaseStep = currentOpacity / numberOfSteps;
 
         const animateRemoval = () => {
             this.setState({
-                opacity: this.state.opacity - opacityDecreaseByStep
+                opacity: this.state.opacity - opacityDecreaseStep
             });
         };
         this.setState({
@@ -84,7 +91,7 @@ class SingleItem extends React.Component {
 
     componentWillMount() {
         // Override default value with what is set via props
-        this.changeCheckedState(this.props.checked);
+        this.setInitialCheckedState(this.props.checked);
     }
 
     render() {
