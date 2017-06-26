@@ -5,7 +5,7 @@ const restrictedCharsError = <p>Only english letters, spaces, number, and the fo
 
 const defaultErrorStyle = {
     color: 'red'
-}
+};
 
 class ItemInput extends React.Component {
     constructor(props) {
@@ -25,7 +25,7 @@ class ItemInput extends React.Component {
     }
 
     handleChange(e) {
-        const newText = e.target.value
+        const newText = e.target.value;
         this.setState({
             inputText: newText,
             userBeganInput: true
