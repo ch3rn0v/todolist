@@ -57,13 +57,7 @@ class List extends React.Component {
   }
 
   countDoneItems(list) {
-    return list.reduce((memo, item) => {
-        let result = 0;
-        if (item.checked) {
-          result = 1;
-        }
-        return memo + result;
-      }, 0);
+    return list.reduce((memo, item) => memo + +item.checked, 0);
   }
 
   setNewItemsList(newItemsList, newOccupiedIDs) {
