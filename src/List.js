@@ -9,19 +9,18 @@ class List extends React.Component {
 
     const defaultDisplayedList = [
       {
-        id: 0,
         checked: true,
-        label: "Visit Awesome List main page"
+        label: "Visit Awesome List main page",
+        display: true
       },
       {
-        id: 1,
         checked: false,
-        label: "Add my own item which will not be saved anywhere"
+        label: "Add my own item which will not be saved anywhere",
+        display: true
       }
     ];
 
     this.state = {
-      occupiedIDs: [0, 1],
       displayedList: defaultDisplayedList,
       doneItemsCount: this.countDoneItems(defaultDisplayedList)
     };
@@ -35,79 +34,40 @@ class List extends React.Component {
     return this.state.displayedList;
   }
 
-  getOccupiedIDs() {
-    return this.state.occupiedIDs;
-  }
-
-  getNextUniqueId() {
-    return this.getOccupiedIDs()[this.getOccupiedIDs().length - 1] + 1;
-  }
-
-  getItemsCurrentIndexByItemsID(id) {
-    let itemsCurrentIndex = -1;
-
-    this.getCurrentItemsList().find((item, index) => {
-      if (item.id === id) {
-        itemsCurrentIndex = index;
-        return true;
-      }
-      return false;
-    });
-
-    return itemsCurrentIndex;
-  }
-
   countDoneItems(list) {
     return list.reduce((memo, item) => {
         return memo + (item.checked ? 1 : 0);
       }, 0);
   }
 
-  setNewItemsList(newItemsList, newOccupiedIDs) {
+  setNewItemsList(newItemsList) {
     const doneItemsCount = this.countDoneItems(newItemsList);
 
     this.setState({
-      occupiedIDs: newOccupiedIDs,
       displayedList: newItemsList,
       doneItemsCount: doneItemsCount
     });
   }
 
   addListItemToDisplayedList(item) {
-    // Generate new ID
-    item.id = this.getNextUniqueId();
-    // Store new item
     let newDisplayedList = this.getCurrentItemsList();
     newDisplayedList.push(item);
-    // Mark new ID as occupied
-    let newOccupiedIDs = this.getOccupiedIDs();
-    newOccupiedIDs.push(item.id);
 
-    this.setNewItemsList(newDisplayedList, newOccupiedIDs);
+    this.setNewItemsList(newDisplayedList);
   }
 
   onItemChange(id) {
     let newDisplayedList = this.getCurrentItemsList();
-    let indexOfItemWithSpecifiedId = this.getItemsCurrentIndexByItemsID(id);
+    newDisplayedList[id].checked = newDisplayedList[id].checked ? false : true;
 
-    if (indexOfItemWithSpecifiedId >=0 ) {
-      newDisplayedList[indexOfItemWithSpecifiedId].checked = newDisplayedList[indexOfItemWithSpecifiedId].checked ? false : true;
-      this.setNewItemsList(newDisplayedList, this.getOccupiedIDs());
-    } else {
-      throw new Error('No item found with the ID specified');
-    }
+    this.setNewItemsList(newDisplayedList);
   }
 
   onItemRemove(id) {
     let newDisplayedList = this.getCurrentItemsList();
-    let indexOfItemWithSpecifiedId = this.getItemsCurrentIndexByItemsID(id);
+    newDisplayedList[id].display = false;
 
-    if (indexOfItemWithSpecifiedId >= 0) {
-      newDisplayedList.splice(indexOfItemWithSpecifiedId, 1);
-      this.setNewItemsList(newDisplayedList, this.getOccupiedIDs());
-    } else {
-      throw new Error('No item found with the ID specified');
-    }
+    this.setNewItemsList(newDisplayedList);
   }
 
   render() {
