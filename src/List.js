@@ -3,27 +3,29 @@ import ListItems from './ListItems';
 import ItemInput from './ItemInput';
 import Math from 'mathjs';
 
+const DEFAULT_DISPLAYED_LIST = [
+  {
+    id: 0,
+    checked: true,
+    label: "Visit Awesome List main page"
+  },
+  {
+    id: 1,
+    checked: false,
+    label: "Add my own item which will not be saved anywhere"
+  }
+];
+
+const DEFAULT_OCCUPIED_IDS = [0, 1];
+
 class List extends React.Component {
   constructor(props) {
     super(props);
 
-    const defaultDisplayedList = [
-      {
-        id: 0,
-        checked: true,
-        label: "Visit Awesome List main page"
-      },
-      {
-        id: 1,
-        checked: false,
-        label: "Add my own item which will not be saved anywhere"
-      }
-    ];
-
     this.state = {
-      occupiedIDs: [0, 1],
-      displayedList: defaultDisplayedList,
-      doneItemsCount: this.countDoneItems(defaultDisplayedList)
+      occupiedIDs: DEFAULT_OCCUPIED_IDS,
+      displayedList: DEFAULT_DISPLAYED_LIST,
+      doneItemsCount: this.countDoneItems(DEFAULT_DISPLAYED_LIST)
     };
 
     this.addListItemToDisplayedList = this.addListItemToDisplayedList.bind(this);
