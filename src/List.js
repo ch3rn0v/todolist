@@ -49,8 +49,9 @@ class List extends React.Component {
     this.getCurrentItemsList().find((item, index) => {
       if (item.id === id) {
         itemsCurrentIndex = index;
+        return true;
       }
-      return 0;
+      return false;
     });
 
     return itemsCurrentIndex;
@@ -58,11 +59,7 @@ class List extends React.Component {
 
   countDoneItems(list) {
     return list.reduce((memo, item) => {
-        let result = 0;
-        if (item.checked) {
-          result = 1;
-        }
-        return memo + result;
+        return memo + (item.checked ? 1 : 0);
       }, 0);
   }
 
