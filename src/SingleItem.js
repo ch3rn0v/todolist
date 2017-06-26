@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const itemUncheckedOpacity = '1.0'
+const itemUncheckedOpacity = '1.0';
 const itemCheckedOpacity = '0.7';
 
 const checkedStyle = 'line-through';
