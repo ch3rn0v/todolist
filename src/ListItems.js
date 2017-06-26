@@ -5,15 +5,16 @@ import SingleItem from './SingleItem';
 
 class ListItems extends React.Component {
     render() {
-        const items = this.props.itemsList.map((item) => {
-            const changeItemState = () => { this.props.onItemChange(item.id); };
-            const removeItem = () => { this.props.onItemRemove(item.id); };
+        const items = this.props.itemsList.map((item, index) => {
+            const changeItemState = () => { this.props.onItemChange(index); };
+            const removeItem = () => { this.props.onItemRemove(index); };
 
             return <SingleItem
-                key={ item.id }
-                id={ item.id }
+                key={ index }
+                id={ index }
                 checked={ item.checked }
                 label={ item.label }
+                display={ item.display }
                 onChange={ changeItemState }
                 onRemove={ removeItem }
             />

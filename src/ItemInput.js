@@ -57,11 +57,15 @@ class ItemInput extends React.Component {
     }
 
     handleSubmit(e) {
+        // Save new item
         e.preventDefault();
         this.props.addItem({
             label: this.state.inputText,
-            checked: false
+            checked: false,
+            display: true
         });
+
+        // Reset the form
         this.setState({
             inputText: '',
             userBeganInput: false,

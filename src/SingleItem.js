@@ -98,24 +98,25 @@ class SingleItem extends React.Component {
         // Process properties
         const id = this.props.id;
         const label = this.props.label;
+        const shouldBedisplayed = this.props.display;
         // Process state
-        let checked = this.state.checked;
+        const checked = this.state.checked;
+        const opacity = this.state.opacity;
         const removingInProgress = this.state.removingInProgress;
-        let opacity = this.state.opacity;
         // Set style
-        let itemLabelStyle = {
+        const itemLabelStyle = {
             textDecoration: checked ? checkedStyle : uncheckedStyle,
             opacity: opacity
         };
         const checkboxStyle = { opacity: opacity };
+        const itemStyle = {
+            display: shouldBedisplayed ? "block" : "none"
+        };
 
         // Render
         return (
-            <li key={ id } className="todo-item">
-                <input type="checkbox"
-                       onChange={ () => { this.handleChange(id) } }
-                       style={ checkboxStyle }
-                       checked={ checked ? "checked" : "" } />
+            <li key={ id } className="todo-item" style={ itemStyle }>
+                <input type="checkbox" onChange={ () => { this.handleChange(id) } } style={ checkboxStyle } checked={ checked ? "checked" : "" } />
                 <p onClick={ () => { this.handleChange(id) } } style={ itemLabelStyle } >{ label }</p>
                 <button onClick={ () => { this.handleRemove(id) } }
                         style={ removingInProgress ? displayNoneStyle : displayBlockStyle }
@@ -132,6 +133,7 @@ SingleItem.propTypes = {
     id: PropTypes.number.isRequired,
     checked: PropTypes.bool.isRequired,
     label: PropTypes.string.isRequired,
+    display: PropTypes.bool.isRequired,
     onChange: PropTypes.func.isRequired,
     onRemove: PropTypes.func.isRequired
 };

@@ -22,10 +22,22 @@ class List extends React.Component {
   constructor(props) {
     super(props);
 
+    const defaultDisplayedList = [
+      {
+        checked: true,
+        label: "Visit Awesome List main page",
+        display: true
+      },
+      {
+        checked: false,
+        label: "Add my own item which will not be saved anywhere",
+        display: true
+      }
+    ];
+
     this.state = {
-      occupiedIDs: DEFAULT_OCCUPIED_IDS,
-      displayedList: DEFAULT_DISPLAYED_LIST,
-      doneItemsCount: this.countDoneItems(DEFAULT_DISPLAYED_LIST)
+      displayedList: defaultDisplayedList,
+      doneItemsCount: this.countDoneItems(defaultDisplayedList)
     };
 
     this.addListItemToDisplayedList = this.addListItemToDisplayedList.bind(this);
@@ -37,77 +49,38 @@ class List extends React.Component {
     return this.state.displayedList;
   }
 
-  // Кажется решение с occupiedIDs можно порефакторить, зачем нам хранить эти ID отдельно
-  getOccupiedIDs() {
-    return this.state.occupiedIDs;
-  }
-
-  getNextUniqueId() {
-    return this.getOccupiedIDs()[this.getOccupiedIDs().length - 1] + 1;
-  }
-
-  getItemsCurrentIndexByItemsID(id) {
-    let itemsCurrentIndex = -1;
-
-    this.getCurrentItemsList().find((item, index) => {
-      if (item.id === id) {
-        itemsCurrentIndex = index;
-      }
-      return 0;
-    });
-
-    return itemsCurrentIndex;
-  }
-
   countDoneItems(list) {
-    return list.reduce((memo, item) => memo + +item.checked, 0);
+    return list.reduce((memo, item) => memo + item.checked, 0);
   }
 
-  setNewItemsList(newItemsList, newOccupiedIDs) {
+  setNewItemsList(newItemsList) {
     const doneItemsCount = this.countDoneItems(newItemsList);
 
     this.setState({
-      occupiedIDs: newOccupiedIDs,
       displayedList: newItemsList,
       doneItemsCount: doneItemsCount
     });
   }
 
   addListItemToDisplayedList(item) {
-    // Generate new ID
-    item.id = this.getNextUniqueId();
-    // Store new item
     let newDisplayedList = this.getCurrentItemsList();
     newDisplayedList.push(item);
-    // Mark new ID as occupied
-    let newOccupiedIDs = this.getOccupiedIDs();
-    newOccupiedIDs.push(item.id);
 
-    this.setNewItemsList(newDisplayedList, newOccupiedIDs);
+    this.setNewItemsList(newDisplayedList);
   }
 
   onItemChange(id) {
     let newDisplayedList = this.getCurrentItemsList();
-    let indexOfItemWithSpecifiedId = this.getItemsCurrentIndexByItemsID(id);
+    newDisplayedList[id].checked = newDisplayedList[id].checked ? false : true;
 
-    if (indexOfItemWithSpecifiedId >=0 ) {
-      newDisplayedList[indexOfItemWithSpecifiedId].checked = !newDisplayedList[indexOfItemWithSpecifiedId].checked;
-      this.setNewItemsList(newDisplayedList, this.getOccupiedIDs());
-    } else {
-      throw new Error('No item found with the ID specified');
-    }
+    this.setNewItemsList(newDisplayedList);
   }
 
   onItemRemove(id) {
     let newDisplayedList = this.getCurrentItemsList();
-    let indexOfItemWithSpecifiedId = this.getItemsCurrentIndexByItemsID(id);
+    newDisplayedList[id].display = false;
 
-    if (indexOfItemWithSpecifiedId >= 0) {
-      newDisplayedList.splice(indexOfItemWithSpecifiedId, 1);
-      this.setNewItemsList(newDisplayedList, this.getOccupiedIDs());
-    } else {
-      throw new Error('No item found with the ID specified');
-    }
+    this.setNewItemsList(newDisplayedList);
   }
 
   render() {
