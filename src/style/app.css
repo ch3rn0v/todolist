@@ -1,0 +1,60 @@
+body {
+    font-family: Helvetica, Arial, sans-serif
+}
+
+div.List {
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.todo-form input {
+    box-sizing: border-box;
+}
+
+.todo-form .text-input {
+    margin-left: 20px;
+    width: 300px;
+}
+
+.todo-form .button {
+    width: 70px;
+    margin: 0 0 0 10px;
+}
+
+ul.todo-list {
+    padding: 0;
+}
+
+.todo-list li {
+    min-height: 25px;
+}
+
+.todo-item {
+    list-style: none;
+}
+
+.todo-item input {
+    cursor: pointer;
+}
+
+.todo-item p {
+    display: inline-block;
+    max-width: 300px;
+    vertical-align: top;
+    margin: 0 0 10px;
+    cursor: pointer;
+}
+
+.todo-item button {
+    width: 70px;
+    float: right;
+    cursor: pointer;
+}
+
+.todo-item button:disabled {
+    cursor: default;
+}
+
+/* .todo-item input {
+    float: left;
+} */
