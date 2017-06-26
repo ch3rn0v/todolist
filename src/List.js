@@ -94,7 +94,7 @@ class List extends React.Component {
     let indexOfItemWithSpecifiedId = this.getItemsCurrentIndexByItemsID(id);
 
     if (indexOfItemWithSpecifiedId >=0 ) {
-      newDisplayedList[indexOfItemWithSpecifiedId].checked = newDisplayedList[indexOfItemWithSpecifiedId].checked ? false : true;
+      newDisplayedList[indexOfItemWithSpecifiedId].checked = !newDisplayedList[indexOfItemWithSpecifiedId].checked;
       this.setNewItemsList(newDisplayedList, this.getOccupiedIDs());
     } else {
       throw new Error('No item found with the ID specified');
