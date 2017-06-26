@@ -39,6 +39,7 @@ class ItemInput extends React.Component {
         let inputPresent = true;
 
         // Text is too short
+        //fixme
         if (currentInput.length < 5) {
             textIsTooShort = true;
         } else if (currentInput.length === 0) {
@@ -49,6 +50,7 @@ class ItemInput extends React.Component {
             errors: {
                 tooShortText: textIsTooShort,
                 // Restricted chars are present in the text
+                //fixme
                 restrictedChars: inputPresent && currentInput.match(/[^;,"()@!.\-: a-zA-Z0-9]/g)
             }
         });
