@@ -37,6 +37,7 @@ class List extends React.Component {
     return this.state.displayedList;
   }
 
+  // Кажется решение с occupiedIDs можно порефакторить, зачем нам хранить эти ID отдельно
   getOccupiedIDs() {
     return this.state.occupiedIDs;
   }
