@@ -5,7 +5,7 @@ const restrictedCharsError = <p>Only english letters, spaces, number, and the fo
 
 const defaultErrorStyle = {
     color: 'red'
-};
+}
 
 class ItemInput extends React.Component {
     constructor(props) {
@@ -25,7 +25,7 @@ class ItemInput extends React.Component {
     }
 
     handleChange(e) {
-        const newText = e.target.value;
+        const newText = e.target.value
         this.setState({
             inputText: newText,
             userBeganInput: true
@@ -39,7 +39,6 @@ class ItemInput extends React.Component {
         let inputPresent = true;
 
         // Text is too short
-        //fixme
         if (currentInput.length < 5) {
             textIsTooShort = true;
         } else if (currentInput.length === 0) {
@@ -50,7 +49,6 @@ class ItemInput extends React.Component {
             errors: {
                 tooShortText: textIsTooShort,
                 // Restricted chars are present in the text
-                //fixme
                 restrictedChars: inputPresent && currentInput.match(/[^;,"()@!.\-: a-zA-Z0-9]/g)
             }
         });
@@ -78,6 +76,10 @@ class ItemInput extends React.Component {
 
     render() {
         const inputText = this.state.inputText;
+        // Find out if there is at least one error:
+        const errorsPresent = Object.keys(this.state.errors).reduce((atLeastOneErrorFound, errorName) => {
+            return this.state.errors[errorName] || atLeastOneErrorFound;
+        }, false);
 
         // Display error if it is present
         const tooShortTextErrorPresent = this.state.errors.tooShortText;
@@ -96,11 +98,7 @@ class ItemInput extends React.Component {
             <div>
                 <form onSubmit={ this.handleSubmit } className="todo-form">
                     <input onChange={ this.handleChange } value={ inputText } className="text-input" />
-                    <input type="submit" value="Add item"
-                           disabled={ tooShortTextErrorPresent ||
-                                      restrictedCharsErrorPresent ||
-                                      !this.state.userBeganInput }
-                           className="button" />
+                    <input type="submit" value="Add item" disabled={ errorsPresent || !this.state.userBeganInput } className="button" />
                 </form>
                 <span className="error-list" style={ tooShortTextStyle } >{ tooShortTextError }</span>
                 <span className="error-list" style={ restrictedCharsStyle } >{ restrictedCharsError }</span>
