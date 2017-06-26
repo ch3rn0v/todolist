@@ -112,10 +112,17 @@ class SingleItem extends React.Component {
         // Render
         return (
             <li key={ id } className="todo-item">
-                <input type="checkbox" onChange={ () => { this.handleChange(id) } } style={ checkboxStyle } checked={ checked ? "checked" : "" } />
+                <input type="checkbox"
+                       onChange={ () => { this.handleChange(id) } }
+                       style={ checkboxStyle }
+                       checked={ checked ? "checked" : "" } />
                 <p onClick={ () => { this.handleChange(id) } } style={ itemLabelStyle } >{ label }</p>
-                <button onClick={ () => { this.handleRemove(id) } } style={ removingInProgress ? displayNoneStyle : displayBlockStyle } className="remove">Remove</button>
-                <button onClick={ () => { this.handleCancelRemoval(checked) } } style={ removingInProgress ? displayBlockStyle : displayNoneStyle } className="cancel">Cancel</button>
+                <button onClick={ () => { this.handleRemove(id) } }
+                        style={ removingInProgress ? displayNoneStyle : displayBlockStyle }
+                        className="remove">Remove</button>
+                <button onClick={ () => { this.handleCancelRemoval(checked) } }
+                        style={ removingInProgress ? displayBlockStyle : displayNoneStyle }
+                        className="cancel">Cancel</button>
             </li>
         );
     }
