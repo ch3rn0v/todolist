@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const itemUncheckedOpacity = '1.0'
+const itemUncheckedOpacity = '1.0';
 const itemCheckedOpacity = '0.7';
 
 const checkedStyle = 'line-through';
@@ -34,7 +34,7 @@ class SingleItem extends React.Component {
     }
 
     changeCheckedState() {
-        let newValue = this.state.checked ? false : true;
+        let newValue = !this.state.checked;
         this.setState({
             checked: newValue,
             opacity: newValue ? itemCheckedOpacity : itemUncheckedOpacity
@@ -118,8 +118,12 @@ class SingleItem extends React.Component {
             <li key={ id } className="todo-item" style={ itemStyle }>
                 <input type="checkbox" onChange={ () => { this.handleChange(id) } } style={ checkboxStyle } checked={ checked ? "checked" : "" } />
                 <p onClick={ () => { this.handleChange(id) } } style={ itemLabelStyle } >{ label }</p>
-                <button onClick={ () => { this.handleRemove(id) } } style={ removingInProgress ? displayNoneStyle : displayBlockStyle } className="remove">Remove</button>
-                <button onClick={ () => { this.handleCancelRemoval(checked) } } style={ removingInProgress ? displayBlockStyle : displayNoneStyle } className="cancel">Cancel</button>
+                <button onClick={ () => { this.handleRemove(id) } }
+                        style={ removingInProgress ? displayNoneStyle : displayBlockStyle }
+                        className="remove">Remove</button>
+                <button onClick={ () => { this.handleCancelRemoval(checked) } }
+                        style={ removingInProgress ? displayBlockStyle : displayNoneStyle }
+                        className="cancel">Cancel</button>
             </li>
         );
     }

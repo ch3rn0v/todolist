@@ -3,6 +3,21 @@ import ListItems from './ListItems';
 import ItemInput from './ItemInput';
 import Math from 'mathjs';
 
+const DEFAULT_DISPLAYED_LIST = [
+  {
+    id: 0,
+    checked: true,
+    label: "Visit Awesome List main page"
+  },
+  {
+    id: 1,
+    checked: false,
+    label: "Add my own item which will not be saved anywhere"
+  }
+];
+
+const DEFAULT_OCCUPIED_IDS = [0, 1];
+
 class List extends React.Component {
   constructor(props) {
     super(props);
@@ -35,9 +50,7 @@ class List extends React.Component {
   }
 
   countDoneItems(list) {
-    return list.reduce((memo, item) => {
-        return memo + (item.checked ? 1 : 0);
-      }, 0);
+    return list.reduce((memo, item) => memo + item.checked, 0);
   }
 
   setNewItemsList(newItemsList) {
