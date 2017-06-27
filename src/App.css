@@ -21,6 +21,10 @@ div.List {
     margin: 0 0 0 10px;
 }
 
+span.error-list {
+    color: red;
+}
+
 ul.todo-list {
     padding: 0;
 }
@@ -54,7 +58,3 @@ ul.todo-list {
 .todo-item button:disabled {
     cursor: default;
 }
-
-/* .todo-item input {
-    float: left;
-} */
