@@ -3,26 +3,25 @@ import ListItems from './ListItems';
 import ItemInput from './ItemInput';
 import Math from 'mathjs';
 
+const DEFAULT_DISPLAYED_LIST = [
+  {
+    checked: true,
+    label: "Visit Awesome List main page",
+    display: true
+  },
+  {
+    checked: false,
+    label: "Add my own item which will not be saved anywhere",
+    display: true
+  }
+];
+
 class List extends React.Component {
   constructor(props) {
     super(props);
 
-    const defaultDisplayedList = [
-      {
-        checked: true,
-        label: "Visit Awesome List main page",
-        display: true
-      },
-      {
-        checked: false,
-        label: "Add my own item which will not be saved anywhere",
-        display: true
-      }
-    ];
-
     this.state = {
-      displayedList: defaultDisplayedList,
-      doneItemsCount: this.countDoneItems(defaultDisplayedList)
+      displayedList: DEFAULT_DISPLAYED_LIST
     };
 
     this.addListItemToDisplayedList = this.addListItemToDisplayedList.bind(this);
@@ -35,17 +34,12 @@ class List extends React.Component {
   }
 
   countDoneItems(list) {
-    return list.reduce((memo, item) => {
-        return memo + (item.checked ? 1 : 0);
-      }, 0);
+    return list.reduce((memo, item) => { return memo + item.checked }, 0);
   }
 
   setNewItemsList(newItemsList) {
-    const doneItemsCount = this.countDoneItems(newItemsList);
-
     this.setState({
-      displayedList: newItemsList,
-      doneItemsCount: doneItemsCount
+      displayedList: newItemsList
     });
   }
 
@@ -58,7 +52,7 @@ class List extends React.Component {
 
   onItemChange(id) {
     let newDisplayedList = this.getCurrentItemsList();
-    newDisplayedList[id].checked = newDisplayedList[id].checked ? false : true;
+    newDisplayedList[id].checked = !newDisplayedList[id].checked;
 
     this.setNewItemsList(newDisplayedList);
   }
@@ -71,7 +65,7 @@ class List extends React.Component {
   }
 
   render() {
-    const doneItemsCount = this.state.doneItemsCount;
+    const doneItemsCount = this.countDoneItems(this.getCurrentItemsList());
     const totalItemsCount = this.getCurrentItemsList().length;
 
     return (
@@ -79,7 +73,9 @@ class List extends React.Component {
         <h1>Awesome List</h1>
         <h2>{ doneItemsCount } done, { totalItemsCount } total. { Math.round((doneItemsCount / totalItemsCount) * 100, 2) }% success!</h2>
         <ItemInput addItem={ this.addListItemToDisplayedList } />
-        <ListItems itemsList={ this.getCurrentItemsList() } onItemChange={ this.onItemChange } onItemRemove={ this.onItemRemove } />
+        <ListItems  itemsList={ this.getCurrentItemsList() }
+                    onItemChange={ this.onItemChange }
+                    onItemRemove={ this.onItemRemove } />
       </div>
     );
   }
