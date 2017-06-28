@@ -5,56 +5,84 @@ import TodoStats from './TodoStats';
 import TodoInput from './TodoInput';
 import TodoItems from './TodoItems';
 
+const DEFAULT_TODO_ITEMS = [
+  {
+    id: '0',
+    label: 'Visit Awesome List main page',
+    checked: true,
+  },
+  {
+    id: '1',
+    label: 'Add my own item which will not be saved anywhere',
+    checked: false,
+  },
+];
+
 class List extends React.Component {
-    constructor(props) {
-        super(props);
+  state = {
+    todos: DEFAULT_TODO_ITEMS,
+  };
 
-        this.state = {
-            totalItems: 0,
-            doneItems: 0
-        };
+  constructor(props) {
+    super(props);
 
-        this.onNewItemAdded = this.onNewItemAdded.bind(this);
-        this.onDoneItemsCountChange = this.onDoneItemsCountChange.bind(this);
-        this.onOverallItemsCountChange = this.onOverallItemsCountChange.bind(this);
+    this.onNewItemAdded = this.onNewItemAdded.bind(this);
+    this.onTodoRemove = this.onTodoRemove.bind(this);
+    this.onTodoStatusChange = this.onTodoStatusChange.bind(this);
+  }
+
+  onNewItemAdded(newItem) {
+    this.setState({
+      todos: [...this.state.todos, newItem],
+    });
+  }
+
+  onTodoRemove(itemId) {
+    const index = this.state.todos.findIndex(t => t.id === itemId);
+    if (index > -1) {
+      this.setState({
+        todos: [
+          ...this.state.todos.slice(0, index),
+          ...this.state.todos.slice(index + 1),
+        ],
+      });
     }
+  }
 
-    onDoneItemsCountChange(newDoneItemsCount) {
-        this.setState({
-            doneItems: newDoneItemsCount
-        });
+  onTodoStatusChange(itemId, status) {
+    const index = this.state.todos.findIndex(t => t.id === itemId);
+
+    if (index > -1) {
+      const todo = this.state.todos[index];
+
+      this.setState({
+        todos: [
+          ...this.state.todos.slice(0, index),
+          { ...todo, checked: status },
+          ...this.state.todos.slice(index + 1),
+        ],
+      });
     }
+  }
 
-    onOverallItemsCountChange(newTotalItemsCount) {
-        this.setState({
-            totalItems: newTotalItemsCount
-        });
-    }
+  render() {
+    const todos = this.state.todos;
+    const totalItems = todos.length;
+    const doneItems = todos.filter(x => x.checked).length;
 
-    onNewItemAdded(newItem) {
-        this.TodoItems.onItemAdd(newItem);
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return !Object.is(this.state, nextState);
-    }
-
-    render() {
-        const doneItems = this.state.doneItems;
-        const totalItems = this.state.totalItems;
-
-        return (
-            <div className="List">
-                <Header />
-                <TodoStats doneItems={ doneItems }
-                           totalItems={ totalItems }/>
-                <TodoInput onNewItemAdded={ this.onNewItemAdded }/>
-                <TodoItems ref={ (TodoItems) => this.TodoItems = TodoItems }
-                            onDoneItemsCountChange={ this.onDoneItemsCountChange }
-                            onOverallItemsCountChange={ this.onOverallItemsCountChange }/>
-            </div>
-        );
-    }
+    return (
+      <div className="List">
+        <Header />
+        <TodoStats doneItems={doneItems} totalItems={totalItems} />
+        <TodoInput onNewItemAdded={this.onNewItemAdded} />
+        <TodoItems
+          todos={todos}
+          onTodoRemove={this.onTodoRemove}
+          onTodoStatusChange={this.onTodoStatusChange}
+        />
+      </div>
+    );
+  }
 }
 
 export default List;

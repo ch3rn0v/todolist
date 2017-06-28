@@ -2,23 +2,21 @@ import React from 'react';
 import Math from 'mathjs';
 import PropTypes from 'prop-types';
 
-class TodoStats extends React.Component {
-    shouldComponentUpdate(nextProps, nextState) {
-        return this.props !== nextProps;
-    }
+function TodoStats({ doneItems, totalItems }) {
+  const completionPercent = totalItems > 0
+    ? Math.round(doneItems / totalItems * 100.0, 2)
+    : 0;
 
-    render() {
-        const doneItemsCount = this.props.doneItems;
-        const totalItemsCount = this.props.totalItems;
-        const completionPercent = Math.round((doneItemsCount / totalItemsCount) * 100.0, 2);
-
-        return <h2>{ doneItemsCount } done out of { totalItemsCount }. { completionPercent }% success.</h2>;
-    }
+  return (
+    <h2>
+      {doneItems} done out of {totalItems}. {completionPercent}% success.
+    </h2>
+  );
 }
 
 TodoStats.propTypes = {
-    doneItems: PropTypes.number.isRequired,
-    totalItems: PropTypes.number.isRequired
+  doneItems: PropTypes.number.isRequired,
+  totalItems: PropTypes.number.isRequired,
 };
 
 export default TodoStats;

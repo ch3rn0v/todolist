@@ -3,6 +3,7 @@
   "version": "0.1.5",
   "private": true,
   "dependencies": {
+    "prettier": "^1.5.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
   },
@@ -16,7 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy" : "npm run build && gh-pages -d build"
+    "deploy": "npm run build && gh-pages -d build"
   },
   "homepage": "https://ch3rn0v.github.io/todolist"
 }
