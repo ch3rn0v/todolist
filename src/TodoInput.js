@@ -72,23 +72,18 @@ class TodoInput extends React.Component {
   }
 
   render() {
-    const inputText = this.state.inputText;
-    const errorList = this.state.errorList;
+    const { inputText, errorList } = this.state;
 
     return (
       <div>
         <form
-          onSubmit={e => {
-            this.handleSubmit(e);
-          }}
+          onSubmit={this.handleSubmit}
           className="todo-form"
         >
           <input
             type="text"
             className="text-input"
-            onChange={e => {
-              this.handleChange(e);
-            }}
+            onChange={this.handleChange}
             value={inputText}
           />
           <input
