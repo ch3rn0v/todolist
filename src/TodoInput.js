@@ -10,8 +10,7 @@ class TodoInput extends React.Component {
 
     this.state = {
       inputText: '',
-      errorList: [],
-      onNewItemAdded: props.onNewItemAdded
+      errorList: []
     };
 
     this.resetInputField = this.resetInputField.bind(this);
@@ -43,7 +42,7 @@ class TodoInput extends React.Component {
   }
 
   generateUniqueID() {
-    // In a real-world app id generation should be different depending on the scheme of id storaging.
+    // In a real-world app id generation should be different depending on the scheme of id storing.
     return `${Date.now()}-${Math.random()}`;
   }
 
@@ -63,12 +62,8 @@ class TodoInput extends React.Component {
       label: this.state.inputText,
       checked: false
     };
-    this.state.onNewItemAdded(newItem);
+    this.props.onNewItemAdded(newItem);
     this.resetInputField();
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !Object.is(this.state, nextState);
   }
 
   render() {
