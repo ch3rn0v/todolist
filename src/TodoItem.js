@@ -70,6 +70,9 @@ class TodoItem extends React.Component {
   onCheckedStateChange() {
     if (!this.state.removalInProgress) {
       this.props.onTodoStatusChange(this.props.id, !this.props.checked);
+      this.setState({
+        opacity: !this.props.checked ? ITEM_CHECKED_OPACITY : ITEM_UNCHECKED_OPACITY,
+      });
     }
   }
 
