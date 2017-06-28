@@ -4,13 +4,13 @@ import './App.css';
 import List from './List';
 
 class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <List />
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div className="App">
+				<List />
+			</div>
+		);
+	}
 }
 
 export default App;

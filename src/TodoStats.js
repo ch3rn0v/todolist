@@ -3,20 +3,18 @@ import Math from 'mathjs';
 import PropTypes from 'prop-types';
 
 function TodoStats({ doneItems, totalItems }) {
-  const completionPercent = totalItems > 0
-    ? Math.round(doneItems / totalItems * 100.0, 2)
-    : 0;
+	const completionPercent = totalItems > 0 ? Math.round(doneItems / totalItems * 100.0, 2) : 0;
 
-  return (
-    <h2>
-      {doneItems} done out of {totalItems}. {completionPercent}% success.
-    </h2>
-  );
+	return (
+		<h2>
+			{doneItems} done out of {totalItems}. {completionPercent}% success.
+		</h2>
+	);
 }
 
 TodoStats.propTypes = {
-  doneItems: PropTypes.number.isRequired,
-  totalItems: PropTypes.number.isRequired,
+	doneItems: PropTypes.number.isRequired,
+	totalItems: PropTypes.number.isRequired
 };
 
 export default TodoStats;
