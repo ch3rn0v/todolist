@@ -1,60 +1,95 @@
 body {
-    font-family: Helvetica, Arial, sans-serif
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+html,
+body,
+#root,
+.App {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+.header,
+div.list-container,
+.footer .footer-text {
+	margin: 0 auto;
+	max-width: 400px;
 }
 
 div.List {
-    margin: 0 auto;
-    max-width: 400px;
+	min-height: 100%;
+	overflow: auto;
+	position: relative;
+}
+
+div.list-container {
+	padding: 0 0 120px; /* padding bottom is equal to the footer's height plus actual padding */
 }
 
 .todo-form input {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .todo-form .text-input {
-    margin-left: 20px;
-    width: 300px;
+	margin-left: 20px;
+	width: 300px;
 }
 
 .todo-form .button {
-    width: 70px;
-    margin: 0 0 0 10px;
+	width: 70px;
+	margin: 0 0 0 10px;
 }
 
 span.error-list {
-    color: red;
+	color: red;
 }
 
 ul.todo-list {
-    padding: 0;
+	padding: 0;
 }
 
 .todo-list li {
-    min-height: 25px;
+	min-height: 25px;
 }
 
 .todo-item {
-    list-style: none;
+	list-style: none;
 }
 
 .todo-item input {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .todo-item p {
-    display: inline-block;
-    max-width: 300px;
-    vertical-align: top;
-    margin: 0 0 10px;
-    cursor: pointer;
+	display: inline-block;
+	max-width: 300px;
+	vertical-align: top;
+	margin: 0 0 10px;
+	cursor: pointer;
 }
 
 .todo-item button {
-    width: 70px;
-    float: right;
-    cursor: pointer;
+	width: 70px;
+	float: right;
+	cursor: pointer;
 }
 
 .todo-item button:disabled {
-    cursor: default;
+	cursor: default;
+}
+
+.footer {
+	background: #eee;
+	width: 100%;
+	height: 80px; /* once you change the footer's height don't forget to change the above container's padding bottom to the same new value */
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+.footer .footer-text {
+	margin: 0 auto;
+	padding: 15px 15px 20px;
 }

@@ -4,6 +4,7 @@ import Header from './Header';
 import TodoStats from './TodoStats';
 import TodoInput from './TodoInput';
 import TodoItems from './TodoItems';
+import Footer from './Footer';
 
 const DEFAULT_TODO_ITEMS = [
 	{
@@ -70,13 +71,16 @@ class List extends React.Component {
 		return (
 			<div className="List">
 				<Header />
-				<TodoStats doneItems={doneItems} totalItems={totalItems} />
-				<TodoInput onNewItemAdded={this.onNewItemAdded} />
-				<TodoItems
-					todos={todos}
-					onTodoRemove={this.onTodoRemove}
-					onTodoStatusChange={this.onTodoStatusChange}
-				/>
+				<div className="list-container">
+					<TodoStats doneItems={doneItems} totalItems={totalItems} />
+					<TodoInput onNewItemAdded={this.onNewItemAdded} />
+					<TodoItems
+						todos={todos}
+						onTodoRemove={this.onTodoRemove}
+						onTodoStatusChange={this.onTodoStatusChange}
+					/>
+				</div>
+				<Footer />
 			</div>
 		);
 	}
