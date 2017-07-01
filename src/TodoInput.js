@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Math from 'mathjs';
 
-import ErrorList from './ErrorList';
+import { ErrorList } from './ErrorList';
 
-class TodoInput extends React.Component {
+export default class TodoInput extends React.Component {
 	state = {
 		inputText: '',
 		errorList: []
@@ -82,5 +82,3 @@ class TodoInput extends React.Component {
 TodoInput.propTypes = {
 	onNewItemAdded: PropTypes.func.isRequired
 };
-
-export default TodoInput;

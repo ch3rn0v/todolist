@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import RemoveItemButton from './RemoveItemButton';
+import { RemoveItemButton } from './RemoveItemButton';
 
 const TIME_BEFORE_FINAL_REMOVAL = 1600.0;
 const ANIMATION_INTERVAL_DURATION = 200.0;

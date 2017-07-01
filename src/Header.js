@@ -1,7 +1,5 @@
 import React from 'react';
 
-function Header() {
+export const Header = () => {
 	return <div className="header"><h1>Awesome List</h1></div>;
-}
-
-export default Header;
+};

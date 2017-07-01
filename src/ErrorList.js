@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function ErrorList({ errorList }) {
+export const ErrorList = ({ errorList }) => {
 	return (
 		<div>
 			{errorList.map((errorText, index) =>
@@ -13,10 +13,8 @@ function ErrorList({ errorList }) {
 			)}
 		</div>
 	);
-}
+};
 
 ErrorList.propTypes = {
 	errorList: PropTypes.array.isRequired
 };
-
-export default ErrorList;

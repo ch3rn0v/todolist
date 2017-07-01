@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import TodoItem from './TodoItem';
 
-function TodoItems({ todos, onTodoRemove, onTodoStatusChange }) {
+export const TodoItems = ({ todos, onTodoRemove, onTodoStatusChange }) => {
 	const renderSingleItem = (item) => {
 		return (
 			<TodoItem
@@ -22,12 +22,10 @@ function TodoItems({ todos, onTodoRemove, onTodoStatusChange }) {
 			{todos.map((item) => renderSingleItem(item))}
 		</ul>
 	);
-}
+};
 
 TodoItems.propTypes = {
 	todos: PropTypes.array.isRequired,
 	onTodoRemove: PropTypes.func.isRequired,
 	onTodoStatusChange: PropTypes.func.isRequired
 };
-
-export default TodoItems;

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Header from './Header';
-import TodoStats from './TodoStats';
+import { Header } from './Header';
+import { TodoStats } from './TodoStats';
 import TodoInput from './TodoInput';
-import TodoItems from './TodoItems';
-import Footer from './Footer';
+import { TodoItems } from './TodoItems';
+import { Footer } from './Footer';
 
 const DEFAULT_TODO_ITEMS = [
 	{
