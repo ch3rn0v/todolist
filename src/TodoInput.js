@@ -5,26 +5,12 @@ import Math from 'mathjs';
 import ErrorList from './ErrorList';
 
 class TodoInput extends React.Component {
-	constructor(props) {
-		super(props);
+	state = {
+		inputText: '',
+		errorList: []
+	};
 
-		this.state = {
-			inputText: '',
-			errorList: []
-		};
-
-		this.resetInputField = this.resetInputField.bind(this);
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-
-	resetInputField() {
-		this.setState({
-			inputText: '',
-			errorList: []
-		});
-	}
-
+	// TODO: move validateText and generateUniqueID to a helper funcs lib
 	validateText(text) {
 		let errorList = [];
 
@@ -46,16 +32,23 @@ class TodoInput extends React.Component {
 		return `${Date.now()}-${Math.random()}`;
 	}
 
-	handleChange(e) {
+	resetInputField = () => {
+		this.setState({
+			inputText: '',
+			errorList: []
+		});
+	};
+
+	handleChange = (e) => {
 		const newUserInput = e.target.value;
 		const errorList = this.validateText(newUserInput);
 		this.setState({
 			inputText: newUserInput,
 			errorList: errorList
 		});
-	}
+	};
 
-	handleSubmit(e) {
+	handleSubmit = (e) => {
 		e.preventDefault();
 		const newItem = {
 			id: this.generateUniqueID(),
@@ -64,7 +57,7 @@ class TodoInput extends React.Component {
 		};
 		this.props.onNewItemAdded(newItem);
 		this.resetInputField();
-	}
+	};
 
 	render() {
 		const { inputText, errorList } = this.state;

@@ -19,14 +19,11 @@ class TodoItem extends React.Component {
 	constructor(props) {
 		super(props);
 
+		// TODO: find out if there is a way to access props from outside of constructor
 		this.state = {
 			removalInProgress: false,
 			opacity: props.checked ? ITEM_CHECKED_OPACITY : ITEM_UNCHECKED_OPACITY
 		};
-
-		this.onItemRemove = this.onItemRemove.bind(this);
-		this.onCheckedStateChange = this.onCheckedStateChange.bind(this);
-		this.onCancelRemoval = this.onCancelRemoval.bind(this);
 	}
 
 	decreaseOpacityDuringRemoval(removalDuration) {
@@ -42,7 +39,7 @@ class TodoItem extends React.Component {
 		this.removingInterval = setInterval(animateRemoval, ANIMATION_INTERVAL_DURATION);
 	}
 
-	onCancelRemoval() {
+	onCancelRemoval = () => {
 		clearTimeout(this.removingTimeout);
 		clearInterval(this.removingInterval);
 
@@ -50,9 +47,9 @@ class TodoItem extends React.Component {
 			removalInProgress: false,
 			opacity: this.props.checked ? ITEM_CHECKED_OPACITY : ITEM_UNCHECKED_OPACITY
 		});
-	}
+	};
 
-	onItemRemove() {
+	onItemRemove = () => {
 		this.removingTimeout = setTimeout(() => {
 			clearInterval(this.removingInterval);
 			this.props.onTodoRemove(this.props.id);
@@ -60,16 +57,16 @@ class TodoItem extends React.Component {
 		this.setState({ removalInProgress: true });
 
 		this.decreaseOpacityDuringRemoval(TIME_BEFORE_FINAL_REMOVAL);
-	}
+	};
 
-	onCheckedStateChange() {
+	onCheckedStateChange = () => {
 		if (!this.state.removalInProgress) {
 			this.props.onTodoStatusChange(this.props.id, !this.props.checked);
 			this.setState({
 				opacity: !this.props.checked ? ITEM_CHECKED_OPACITY : ITEM_UNCHECKED_OPACITY
 			});
 		}
-	}
+	};
 
 	render() {
 		const { checked, label } = this.props;

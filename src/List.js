@@ -24,30 +24,22 @@ class List extends React.Component {
 		todos: DEFAULT_TODO_ITEMS
 	};
 
-	constructor(props) {
-		super(props);
-
-		this.onNewItemAdded = this.onNewItemAdded.bind(this);
-		this.onTodoRemove = this.onTodoRemove.bind(this);
-		this.onTodoStatusChange = this.onTodoStatusChange.bind(this);
-	}
-
-	onNewItemAdded(newItem) {
+	onNewItemAdded = (newItem) => {
 		this.setState({
 			todos: [ ...this.state.todos, newItem ]
 		});
-	}
+	};
 
-	onTodoRemove(itemId) {
+	onTodoRemove = (itemId) => {
 		const index = this.state.todos.findIndex((t) => t.id === itemId);
 		if (index > -1) {
 			this.setState({
 				todos: [ ...this.state.todos.slice(0, index), ...this.state.todos.slice(index + 1) ]
 			});
 		}
-	}
+	};
 
-	onTodoStatusChange(itemId, status) {
+	onTodoStatusChange = (itemId, status) => {
 		const index = this.state.todos.findIndex((t) => t.id === itemId);
 
 		if (index > -1) {
@@ -61,7 +53,7 @@ class List extends React.Component {
 				]
 			});
 		}
-	}
+	};
 
 	render() {
 		const todos = this.state.todos;
