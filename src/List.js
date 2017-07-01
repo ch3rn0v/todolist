@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { addNewItemToArray, removeItemFromArray, toggleItemStatusInArray } from './lib/todoHelpers';
+
 import { Header } from './Header';
 import { TodoStats } from './TodoStats';
 import TodoInput from './TodoInput';
@@ -24,35 +26,22 @@ class List extends React.Component {
 		todos: DEFAULT_TODO_ITEMS
 	};
 
-	onNewItemAdded = (newItem) => {
+	onNewItemAdded = (itemToBeAdded) => {
 		this.setState({
-			todos: [ ...this.state.todos, newItem ]
+			todos: addNewItemToArray(this.state.todos, itemToBeAdded)
 		});
 	};
 
-	onTodoRemove = (itemId) => {
-		const index = this.state.todos.findIndex((t) => t.id === itemId);
-		if (index > -1) {
-			this.setState({
-				todos: [ ...this.state.todos.slice(0, index), ...this.state.todos.slice(index + 1) ]
-			});
-		}
+	onTodoRemove = (itemToBeRemoved) => {
+		this.setState({
+			todos: removeItemFromArray(this.state.todos, itemToBeRemoved)
+		});
 	};
 
-	onTodoStatusChange = (itemId, status) => {
-		const index = this.state.todos.findIndex((t) => t.id === itemId);
-
-		if (index > -1) {
-			const todo = this.state.todos[index];
-
-			this.setState({
-				todos: [
-					...this.state.todos.slice(0, index),
-					{ ...todo, checked: status },
-					...this.state.todos.slice(index + 1)
-				]
-			});
-		}
+	onTodoStatusChange = (itemToBeChanged) => {
+		this.setState({
+			todos: toggleItemStatusInArray(this.state.todos, itemToBeChanged)
+		});
 	};
 
 	render() {

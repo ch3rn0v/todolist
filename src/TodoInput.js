@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Math from 'mathjs';
+
+import { validateText, createNewItem } from './lib/todoHelpers';
 
 import { ErrorList } from './ErrorList';
 
@@ -9,28 +10,6 @@ export default class TodoInput extends React.Component {
 		inputText: '',
 		errorList: []
 	};
-
-	// TODO: move validateText and generateUniqueID to a helper funcs lib
-	validateText(text) {
-		let errorList = [];
-
-		if (text.length < 5) {
-			errorList.push('Text should be at least five characters long. ');
-		}
-
-		if (text.match(/[^;,"()@!.\-: a-zA-Z0-9]/g)) {
-			errorList.push(
-				'Only english letters, spaces, number, and the following characters are allowed: colons, commas, semicolons, round brackets, exclamation marks, dots, @ signs, dashes, and double quotes.'
-			);
-		}
-
-		return errorList;
-	}
-
-	generateUniqueID() {
-		// In a real-world app id generation should be different depending on the scheme of id storing.
-		return `${Date.now()}-${Math.random()}`;
-	}
 
 	resetInputField = () => {
 		this.setState({
@@ -41,7 +20,7 @@ export default class TodoInput extends React.Component {
 
 	handleChange = (e) => {
 		const newUserInput = e.target.value;
-		const errorList = this.validateText(newUserInput);
+		const errorList = validateText(newUserInput);
 		this.setState({
 			inputText: newUserInput,
 			errorList: errorList
@@ -50,12 +29,8 @@ export default class TodoInput extends React.Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		const newItem = {
-			id: this.generateUniqueID(),
-			label: this.state.inputText,
-			checked: false
-		};
-		this.props.onNewItemAdded(newItem);
+
+		this.props.onNewItemAdded(createNewItem(this.state.inputText));
 		this.resetInputField();
 	};
 

@@ -1,10 +1,10 @@
 import React from 'react';
-import Math from 'mathjs';
 import PropTypes from 'prop-types';
 
+import { countFractionPercent } from './lib/todoHelpers';
+
 export const TodoStats = ({ doneItems, totalItems }) => {
-	// TODO: move completionPercent to a helper funcs lib
-	const completionPercent = totalItems > 0 ? Math.round(doneItems / totalItems * 100.0, 2) : 0;
+	const completionPercent = countFractionPercent(doneItems, totalItems, 2);
 
 	return (
 		<h2>

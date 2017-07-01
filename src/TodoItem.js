@@ -19,10 +19,9 @@ class TodoItem extends React.Component {
 	constructor(props) {
 		super(props);
 
-		// TODO: find out if there is a way to access props from outside of constructor
 		this.state = {
 			removalInProgress: false,
-			opacity: props.checked ? ITEM_CHECKED_OPACITY : ITEM_UNCHECKED_OPACITY
+			opacity: props.item.checked ? ITEM_CHECKED_OPACITY : ITEM_UNCHECKED_OPACITY
 		};
 	}
 
@@ -45,14 +44,14 @@ class TodoItem extends React.Component {
 
 		this.setState({
 			removalInProgress: false,
-			opacity: this.props.checked ? ITEM_CHECKED_OPACITY : ITEM_UNCHECKED_OPACITY
+			opacity: this.props.item.checked ? ITEM_CHECKED_OPACITY : ITEM_UNCHECKED_OPACITY
 		});
 	};
 
 	onItemRemove = () => {
 		this.removingTimeout = setTimeout(() => {
 			clearInterval(this.removingInterval);
-			this.props.onTodoRemove(this.props.id);
+			this.props.onTodoRemove(this.props.item);
 		}, TIME_BEFORE_FINAL_REMOVAL);
 		this.setState({ removalInProgress: true });
 
@@ -61,15 +60,15 @@ class TodoItem extends React.Component {
 
 	onCheckedStateChange = () => {
 		if (!this.state.removalInProgress) {
-			this.props.onTodoStatusChange(this.props.id, !this.props.checked);
+			this.props.onTodoStatusChange(this.props.item);
 			this.setState({
-				opacity: !this.props.checked ? ITEM_CHECKED_OPACITY : ITEM_UNCHECKED_OPACITY
+				opacity: !this.props.item.checked ? ITEM_CHECKED_OPACITY : ITEM_UNCHECKED_OPACITY
 			});
 		}
 	};
 
 	render() {
-		const { checked, label } = this.props;
+		const { checked, label } = this.props.item;
 		const { opacity, removalInProgress } = this.state;
 
 		const checkboxCssStyle = {
@@ -101,9 +100,7 @@ class TodoItem extends React.Component {
 }
 
 TodoItem.propTypes = {
-	id: PropTypes.string.isRequired,
-	label: PropTypes.string.isRequired,
-	checked: PropTypes.bool.isRequired,
+	item: PropTypes.object.isRequired,
 	onTodoRemove: PropTypes.func.isRequired,
 	onTodoStatusChange: PropTypes.func.isRequired
 };

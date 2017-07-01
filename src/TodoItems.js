@@ -6,14 +6,7 @@ import TodoItem from './TodoItem';
 export const TodoItems = ({ todos, onTodoRemove, onTodoStatusChange }) => {
 	const renderSingleItem = (item) => {
 		return (
-			<TodoItem
-				key={item.id}
-				id={item.id}
-				label={item.label}
-				checked={item.checked}
-				onTodoRemove={onTodoRemove}
-				onTodoStatusChange={onTodoStatusChange}
-			/>
+			<TodoItem key={item.id} item={item} onTodoRemove={onTodoRemove} onTodoStatusChange={onTodoStatusChange} />
 		);
 	};
 
