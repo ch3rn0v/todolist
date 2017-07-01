@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { validateText, createNewItem } from './lib/todoHelpers';
+import { validateText, createNewItem } from '../lib/todoHelpers';
 
 import { ErrorList } from './ErrorList';
 

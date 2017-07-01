@@ -3,12 +3,20 @@ body {
 }
 
 html,
-body,
-#root,
-.App {
+body {
 	margin: 0;
 	padding: 0;
 	height: 100%;
+}
+
+#root {
+	min-height: 100%;
+	position: relative;
+}
+
+div.content-section {
+	/* padding bottom is equal to the footer's height plus actual padding */
+	padding: 0 0 100px;
 }
 
 .header,
@@ -18,14 +26,9 @@ div.list-container,
 	max-width: 400px;
 }
 
-div.List {
-	min-height: 100%;
+.header,
+.list-container {
 	overflow: auto;
-	position: relative;
-}
-
-div.list-container {
-	padding: 0 0 120px; /* padding bottom is equal to the footer's height plus actual padding */
 }
 
 .todo-form input {
