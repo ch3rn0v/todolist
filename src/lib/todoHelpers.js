@@ -71,3 +71,17 @@ export const filterTodos = (array, route) => {
 			return array;
 	}
 };
+
+const changeItemSyncStatus = (item, newStatus) => {
+	return { ...item, serverSyncStatus: newStatus };
+};
+
+export const setItemNewSyncStatusInArray = (array, item, newStatus) => {
+	const itemId = findIndexOfItem(array, item);
+	if (itemId > -1) {
+		const itemWithNewSyncStatus = changeItemSyncStatus(item, newStatus);
+		return [ ...array.slice(0, itemId), itemWithNewSyncStatus, ...array.slice(itemId + 1) ];
+	} else {
+		throw new Error('The item is not present in the array.');
+	}
+};

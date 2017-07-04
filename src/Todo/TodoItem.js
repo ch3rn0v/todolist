@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { RemoveItemButton } from './RemoveItemButton';
 
 const TIME_BEFORE_FINAL_REMOVAL = 1600.0;
-const ANIMATION_INTERVAL_DURATION = 200.0;
+const REMOVAL_ANIMATION_INTERVAL_DURATION = 200.0;
 
 const ITEM_UNCHECKED_OPACITY = '1.0';
 const ITEM_CHECKED_OPACITY = '0.7';
@@ -26,7 +26,7 @@ export class TodoItem extends React.Component {
 	}
 
 	decreaseOpacityDuringRemoval(removalDuration) {
-		const numberOfSteps = removalDuration / ANIMATION_INTERVAL_DURATION;
+		const numberOfSteps = removalDuration / REMOVAL_ANIMATION_INTERVAL_DURATION;
 		const currentOpacity = this.state.opacity;
 		const opacityDecreaseStep = currentOpacity / numberOfSteps;
 
@@ -35,7 +35,7 @@ export class TodoItem extends React.Component {
 				opacity: this.state.opacity - opacityDecreaseStep
 			});
 		};
-		this.removingInterval = setInterval(animateRemoval, ANIMATION_INTERVAL_DURATION);
+		this.removingInterval = setInterval(animateRemoval, REMOVAL_ANIMATION_INTERVAL_DURATION);
 	}
 
 	onCancelRemoval = () => {
@@ -68,7 +68,7 @@ export class TodoItem extends React.Component {
 	};
 
 	render() {
-		const { checked, label } = this.props.item;
+		const { label, checked, serverSyncStatus } = this.props.item;
 		const { opacity, removalInProgress } = this.state;
 
 		const checkboxCssStyle = {
@@ -79,8 +79,24 @@ export class TodoItem extends React.Component {
 			textDecoration: checked ? CHECKED_LABEL_STYLE : UNCHECKED_LABEL_STYLE
 		};
 
+		let serverSyncStatusClassName = '';
+
+		switch (serverSyncStatus) {
+			case 'in-process':
+				serverSyncStatusClassName = 'in-process';
+				break;
+			case 'failed':
+				serverSyncStatusClassName = 'failed';
+				break;
+			case 'synced':
+				serverSyncStatusClassName = 'success';
+				break;
+			default:
+				serverSyncStatusClassName = '';
+		}
+
 		return (
-			<li className="todo-item">
+			<li className={serverSyncStatusClassName + ' todo-item'}>
 				<input
 					onChange={this.onCheckedStateChange}
 					type="checkbox"

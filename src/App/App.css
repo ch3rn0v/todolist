@@ -89,6 +89,18 @@ ul.todo-list {
 	min-height: 25px;
 }
 
+.todo-list li.in-process {
+	background-color: rgba(255, 255, 0, 0.2);
+}
+
+.todo-list li.failed {
+	background-color: rgba(255, 0, 0, 0.2);
+}
+
+.todo-list li.success {
+	background-color: rgba(0, 255, 0, 0.2);
+}
+
 .todo-item {
 	list-style: none;
 }
