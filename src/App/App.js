@@ -2,10 +2,10 @@ import React from 'react';
 import './App.css';
 
 import { Header } from './Header';
-import List from '../Todo/List';
+import { List } from '../Todo/List';
 import { Footer } from './Footer';
 
-class App extends React.Component {
+export class App extends React.Component {
 	render() {
 		return (
 			<div className="App">
@@ -18,5 +18,3 @@ class App extends React.Component {
 		);
 	}
 }
-
-export default App;

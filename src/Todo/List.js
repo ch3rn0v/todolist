@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { addNewItemToArray, removeItemFromArray, toggleItemStatusInArray, filterTodos } from '../lib/todoHelpers';
 
 import { TodoStats } from './TodoStats';
-import TodoLinks from './TodoLinks';
-import TodoInput from './TodoInput';
+import { TodoLinks } from './TodoLinks';
+import { TodoInput } from './TodoInput';
 import { TodoItems } from './TodoItems';
 
 const DEFAULT_TODO_ITEMS = [
@@ -21,7 +21,7 @@ const DEFAULT_TODO_ITEMS = [
 	}
 ];
 
-class List extends React.Component {
+export class List extends React.Component {
 	static contextTypes = {
 		route: PropTypes.string.isRequired
 	};
@@ -70,5 +70,3 @@ class List extends React.Component {
 		);
 	}
 }
-
-export default List;

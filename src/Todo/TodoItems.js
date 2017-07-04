@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import TodoItem from './TodoItem';
+import { TodoItem } from './TodoItem';
 
 export const TodoItems = ({ todos, onTodoRemove, onTodoStatusChange }) => {
 	const renderSingleItem = (item) => {

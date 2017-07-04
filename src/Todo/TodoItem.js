@@ -12,7 +12,7 @@ const ITEM_CHECKED_OPACITY = '0.7';
 const CHECKED_LABEL_STYLE = 'line-through';
 const UNCHECKED_LABEL_STYLE = 'none';
 
-class TodoItem extends React.Component {
+export class TodoItem extends React.Component {
 	removingInterval = null;
 	removingTimeout = null;
 
@@ -104,5 +104,3 @@ TodoItem.propTypes = {
 	onTodoRemove: PropTypes.func.isRequired,
 	onTodoStatusChange: PropTypes.func.isRequired
 };
-
-export default TodoItem;

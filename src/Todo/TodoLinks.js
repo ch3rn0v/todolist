@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from '../Routing';
 
-class TodoLinks extends React.Component {
+export class TodoLinks extends React.Component {
 	render() {
 		return (
 			<div className="nav-links">
@@ -15,5 +15,3 @@ class TodoLinks extends React.Component {
 		);
 	}
 }
-
-export default TodoLinks;

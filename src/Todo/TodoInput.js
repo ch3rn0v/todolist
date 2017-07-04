@@ -5,7 +5,7 @@ import { validateText, createNewItem } from '../lib/todoHelpers';
 
 import { ErrorList } from './ErrorList';
 
-export default class TodoInput extends React.Component {
+export class TodoInput extends React.Component {
 	state = {
 		inputText: '',
 		errorList: []
