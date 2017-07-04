@@ -23,7 +23,7 @@ const DEFAULT_TODO_ITEMS = [
 
 export class List extends React.Component {
 	static contextTypes = {
-		route: PropTypes.string.isRequired
+		route: PropTypes.string
 	};
 
 	state = {
