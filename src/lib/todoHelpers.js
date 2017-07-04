@@ -58,3 +58,16 @@ export const toggleItemStatusInArray = (array, item) => {
 		throw new Error('The item is not present in the array.');
 	}
 };
+
+export const filterTodos = (array, route) => {
+	switch (route) {
+		case '/in_process':
+			return array.filter((item) => !item.checked);
+		case '/done':
+			return array.filter((item) => item.checked);
+		case '/':
+			return array;
+		default:
+			return array;
+	}
+};

@@ -1,5 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App/App';
+import { Router } from './Routing';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+	<Router>
+		<App />
+	</Router>,
+	document.getElementById('root')
+);

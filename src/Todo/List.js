@@ -1,8 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import { addNewItemToArray, removeItemFromArray, toggleItemStatusInArray } from '../lib/todoHelpers';
+import { addNewItemToArray, removeItemFromArray, toggleItemStatusInArray, filterTodos } from '../lib/todoHelpers';
 
 import { TodoStats } from './TodoStats';
+import TodoLinks from './TodoLinks';
 import TodoInput from './TodoInput';
 import { TodoItems } from './TodoItems';
 
@@ -20,6 +22,10 @@ const DEFAULT_TODO_ITEMS = [
 ];
 
 class List extends React.Component {
+	static contextTypes = {
+		route: PropTypes.string.isRequired
+	};
+
 	state = {
 		todos: DEFAULT_TODO_ITEMS
 	};
@@ -44,6 +50,7 @@ class List extends React.Component {
 
 	render() {
 		const todos = this.state.todos;
+		const filteredTodos = filterTodos(todos, this.context.route);
 		const totalItems = todos.length;
 		const doneItems = todos.filter((x) => x.checked).length;
 
@@ -51,9 +58,10 @@ class List extends React.Component {
 			<div className="List">
 				<div className="list-container">
 					<TodoStats doneItems={doneItems} totalItems={totalItems} />
+					<TodoLinks />
 					<TodoInput onNewItemAdded={this.onNewItemAdded} />
 					<TodoItems
-						todos={todos}
+						todos={filteredTodos}
 						onTodoRemove={this.onTodoRemove}
 						onTodoStatusChange={this.onTodoStatusChange}
 					/>

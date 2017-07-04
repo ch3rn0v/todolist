@@ -31,6 +31,38 @@ div.list-container,
 	overflow: auto;
 }
 
+.nav-links {
+	margin: 0 0 20px;
+}
+
+.nav-links p,
+.nav-links ul {
+	float: left;
+	list-style: none;
+}
+
+.nav-links ul {
+	padding: 0;
+}
+
+.nav-links li {
+	float: left;
+}
+
+.nav-link {
+	padding: 0 4px 0;
+}
+
+.nav-link.active {
+	color: black;
+	cursor: default;
+	text-decoration: none;
+}
+
+.nav-link.inactive {
+	color: blue;
+}
+
 .todo-form input {
 	box-sizing: border-box;
 }
