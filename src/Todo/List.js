@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import {
 	addNewItemToArray,
 	removeItemFromArray,
-	toggleItemStatusInArray,
+	toggleItemStatus,
+	saveToggledItemStatusInArray,
 	filterTodos,
 	setItemNewSyncStatusInArray
 } from '../lib/todoHelpers';
-import { loadTodos, createTodo } from '../lib/todoService';
+import { loadTodos, createTodo, saveTodo, destroyTodo } from '../lib/todoService';
 
 import { TodoStats } from './TodoStats';
 import { TodoLinks } from './TodoLinks';
@@ -42,16 +43,25 @@ export class List extends React.Component {
 		});
 	};
 
+	onTodoStatusChange = (itemToBeChanged) => {
+		const itemWithNewStatus = toggleItemStatus(itemToBeChanged);
+		this.setState({
+			todos: saveToggledItemStatusInArray(this.state.todos, itemWithNewStatus)
+		});
+		this.setServerSyncStatus(itemWithNewStatus, 'in-process');
+		saveTodo(itemWithNewStatus).then((res) => {
+			this.setServerSyncStatus(itemWithNewStatus, 'synced');
+			setTimeout(() => {
+				this.setServerSyncStatus(itemWithNewStatus, '');
+			}, SERVER_SYNC_STATUS_RESET_DURATION);
+		});
+	};
+
 	onTodoRemove = (itemToBeRemoved) => {
 		this.setState({
 			todos: removeItemFromArray(this.state.todos, itemToBeRemoved)
 		});
-	};
-
-	onTodoStatusChange = (itemToBeChanged) => {
-		this.setState({
-			todos: toggleItemStatusInArray(this.state.todos, itemToBeChanged)
-		});
+		destroyTodo(itemToBeRemoved.id);
 	};
 
 	setServerSyncStatus = (todoItem, newStatus) => {

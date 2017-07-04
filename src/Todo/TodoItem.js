@@ -94,6 +94,9 @@ export class TodoItem extends React.Component {
 			default:
 				serverSyncStatusClassName = '';
 		}
+		if (removalInProgress) {
+			serverSyncStatusClassName = 'in-process';
+		}
 
 		return (
 			<li className={serverSyncStatusClassName + ' todo-item'}>

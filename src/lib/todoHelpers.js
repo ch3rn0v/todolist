@@ -45,15 +45,14 @@ export const removeItemFromArray = (array, item) => {
 	}
 };
 
-const toggleItemStatus = (item) => {
+export const toggleItemStatus = (item) => {
 	return { ...item, checked: !item.checked };
 };
 
-export const toggleItemStatusInArray = (array, item) => {
+export const saveToggledItemStatusInArray = (array, item) => {
 	const itemId = findIndexOfItem(array, item);
 	if (itemId > -1) {
-		const itemWithNewStatus = toggleItemStatus(item);
-		return [ ...array.slice(0, itemId), itemWithNewStatus, ...array.slice(itemId + 1) ];
+		return [ ...array.slice(0, itemId), item, ...array.slice(itemId + 1) ];
 	} else {
 		throw new Error('The item is not present in the array.');
 	}
