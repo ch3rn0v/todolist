@@ -1,4 +1,5 @@
 import React from 'react';
+import 'typeface-roboto';
 import './App.css';
 
 import { Header } from './Header';

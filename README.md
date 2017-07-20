@@ -22,3 +22,7 @@ Its contents should look like this:
   ]
 }
 ```
+
+### Starting-up Instructions
+1. Run `json-server -p 8080 -w db.json` in order to start json-server on port 8080 and make it watch the changes to the db.json file.
+2. Run `npm start` in order to serve React files.
