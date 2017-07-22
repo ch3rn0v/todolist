@@ -2,8 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { validateText, createNewItem } from '../lib/todoHelpers';
-
 import { ErrorList } from './ErrorList';
+
+import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField';
+import Button from 'material-ui/Button';
+import FormHelperText from 'material-ui/Form/FormHelperText';
 
 export class TodoInput extends React.Component {
 	state = {
@@ -36,20 +40,32 @@ export class TodoInput extends React.Component {
 
 	render() {
 		const { inputText, errorList } = this.state;
+		const errorPresent = errorList.length > 0;
 
 		return (
-			<div>
+			<Paper className="panel input" elevation={4}>
 				<form onSubmit={this.handleSubmit} className="todo-form">
-					<input type="text" className="text-input" onChange={this.handleChange} value={inputText} />
-					<input
-						type="submit"
-						className="button"
-						value="Add item"
-						disabled={!(inputText.length > 0 && errorList.length === 0)}
+					<TextField
+						label="Enter new Todo item"
+						className="text-input"
+						onChange={this.handleChange}
+						value={inputText}
+						error={errorPresent}
 					/>
+					<Button
+						raised
+						color="primary"
+						className="button"
+						type="submit"
+						disabled={!(inputText.length > 0 && errorList.length === 0)}
+					>
+						Add item
+					</Button>
 				</form>
-				<ErrorList errorList={errorList} />
-			</div>
+				<FormHelperText error>
+					<ErrorList errorList={errorList} />
+				</FormHelperText>
+			</Paper>
 		);
 	}
 }

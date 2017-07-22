@@ -58,14 +58,14 @@ export const saveToggledItemStatusInArray = (array, item) => {
 	}
 };
 
-export const filterTodos = (array, route) => {
-	switch (route) {
-		case '/in_process':
-			return array.filter((item) => !item.checked);
-		case '/done':
-			return array.filter((item) => item.checked);
-		case '/':
+export const filterTodosByTab = (array, tabIndex) => {
+	switch (tabIndex) {
+		case 0:
 			return array;
+		case 1:
+			return array.filter((item) => !item.checked);
+		case 2:
+			return array.filter((item) => item.checked);
 		default:
 			return array;
 	}

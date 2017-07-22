@@ -3,15 +3,14 @@ import PropTypes from 'prop-types';
 
 export const ErrorList = ({ errorList }) => {
 	return (
-		<div>
-			{errorList.map((errorText, index) =>
+		<span>
+			{errorList.map((errorText, index) => (
 				<span className="error-list" key={index}>
-					<p>
-						{errorText}
-					</p>
+					{errorText}
+					<br />
 				</span>
-			)}
-		</div>
+			))}
+		</span>
 	);
 };
 

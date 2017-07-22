@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './App/App';
-import { Router } from './Routing';
+import { MuiThemeProvider } from 'material-ui/styles';
 
 ReactDOM.render(
-	<Router>
+	<MuiThemeProvider>
 		<App />
-	</Router>,
+	</MuiThemeProvider>,
 	document.getElementById('root')
 );

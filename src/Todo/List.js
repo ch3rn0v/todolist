@@ -6,7 +6,6 @@ import {
 	removeItemFromArray,
 	toggleItemStatus,
 	saveToggledItemStatusInArray,
-	filterTodos,
 	setItemNewSyncStatusInArray
 } from '../lib/todoHelpers';
 import { loadTodos, createTodo, saveTodo, destroyTodo } from '../lib/todoService';
@@ -14,7 +13,6 @@ import { loadTodos, createTodo, saveTodo, destroyTodo } from '../lib/todoService
 import { TodoStats } from './TodoStats';
 import { TodoLinks } from './TodoLinks';
 import { TodoInput } from './TodoInput';
-import { TodoItems } from './TodoItems';
 
 const SERVER_SYNC_STATUS_RESET_DURATION = 1000.0;
 
@@ -76,7 +74,6 @@ export class List extends React.Component {
 
 	render() {
 		const todos = this.state.todos;
-		const filteredTodos = filterTodos(todos, this.context.route);
 		const totalItems = todos.length;
 		const doneItems = todos.filter((x) => x.checked).length;
 
@@ -84,10 +81,9 @@ export class List extends React.Component {
 			<div className="List">
 				<div className="list-container">
 					<TodoStats doneItems={doneItems} totalItems={totalItems} />
-					<TodoLinks />
 					<TodoInput onNewItemAdded={this.onNewItemAdded} />
-					<TodoItems
-						todos={filteredTodos}
+					<TodoLinks
+						todos={todos}
 						onTodoRemove={this.onTodoRemove}
 						onTodoStatusChange={this.onTodoStatusChange}
 					/>

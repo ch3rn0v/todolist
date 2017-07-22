@@ -1,6 +1,6 @@
 import React from 'react';
 import 'typeface-roboto';
-import './App.css';
+import './Style.css';
 
 import { Header } from './Header';
 import { List } from '../Todo/List';
