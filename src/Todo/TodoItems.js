@@ -2,60 +2,67 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
-import Paper from 'material-ui/Paper';
 import Checkbox from 'material-ui/Checkbox';
 import Button from 'material-ui/Button';
+import { LinearProgress } from 'material-ui/Progress';
 
 export const TodoItems = ({ todos, onTodoRemove, onTodoStatusChange }) => {
 	return (
-		<Paper>
-			<Table>
-				<TableHead>
-					<TableRow>
-						<TableCell>Mark done</TableCell>
-						<TableCell>Title</TableCell>
-						<TableCell>Control</TableCell>
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{todos.map((item) => {
-						const itemClass = item.checked ? 'done' : 'in-process';
-						const rowItemClass = 'todo-' + itemClass;
-						return (
-							<TableRow key={item.id} className={rowItemClass}>
-								<TableCell>
-									<Checkbox
-										onChange={() => {
-											onTodoStatusChange(item);
-										}}
-										checked={item.checked}
-									/>
-								</TableCell>
-								<TableCell
-									className="todo-label"
-									onClick={() => {
+		<Table>
+			<TableHead>
+				<TableRow>
+					<TableCell>Mark done</TableCell>
+					<TableCell>Title</TableCell>
+					<TableCell>Control</TableCell>
+				</TableRow>
+			</TableHead>
+
+			{todos.map((item) => {
+				const itemClass = item.checked ? 'done' : 'in-process';
+				const rowItemClass = 'todo-' + itemClass;
+				const shouldDisplayProgress =
+					item.serverSyncStatus === 'in-process' || item.serverSyncStatus === 'synced' ? '' : 'none';
+				const syncProgressStyle = { display: shouldDisplayProgress };
+				return (
+					<TableBody key={item.id}>
+						<TableRow className={rowItemClass}>
+							<TableCell>
+								<Checkbox
+									onChange={() => {
 										onTodoStatusChange(item);
 									}}
+									checked={item.checked}
+								/>
+							</TableCell>
+							<TableCell
+								className="todo-label"
+								onClick={() => {
+									onTodoStatusChange(item);
+								}}
+							>
+								{item.label}
+							</TableCell>
+							<TableCell>
+								<Button
+									raised
+									color="primary"
+									onClick={() => {
+										onTodoRemove(item);
+									}}
 								>
-									{item.label}
-								</TableCell>
-								<TableCell>
-									<Button
-										raised
-										color="primary"
-										onClick={() => {
-											onTodoRemove(item);
-										}}
-									>
-										Remove
-									</Button>
-								</TableCell>
-							</TableRow>
-						);
-					})}
-				</TableBody>
-			</Table>
-		</Paper>
+									Remove
+								</Button>
+							</TableCell>
+						</TableRow>
+						<TableRow className="sync-progress" style={syncProgressStyle}>
+							<TableCell colSpan="3">
+								<LinearProgress />
+							</TableCell>
+						</TableRow>
+					</TableBody>
+				);
+			})}
+		</Table>
 	);
 };
 

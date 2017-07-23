@@ -13,7 +13,7 @@ import { TodoStats } from './TodoStats';
 import { TodoLinks } from './TodoLinks';
 import { TodoInput } from './TodoInput';
 
-const SERVER_SYNC_STATUS_RESET_DURATION = 1000.0;
+const SERVER_SYNC_STATUS_RESET_DURATION = 1500.0;
 
 export class List extends React.Component {
 	static contextTypes = {
