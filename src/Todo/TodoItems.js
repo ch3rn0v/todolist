@@ -19,8 +19,10 @@ export const TodoItems = ({ todos, onTodoRemove, onTodoStatusChange }) => {
 				</TableHead>
 				<TableBody>
 					{todos.map((item) => {
+						const itemClass = item.checked ? 'done' : 'in-process';
+						const rowItemClass = 'todo-' + itemClass;
 						return (
-							<TableRow key={item.id}>
+							<TableRow key={item.id} className={rowItemClass}>
 								<TableCell>
 									<Checkbox
 										onChange={() => {
@@ -29,7 +31,14 @@ export const TodoItems = ({ todos, onTodoRemove, onTodoStatusChange }) => {
 										checked={item.checked}
 									/>
 								</TableCell>
-								<TableCell>{item.label}</TableCell>
+								<TableCell
+									className="todo-label"
+									onClick={() => {
+										onTodoStatusChange(item);
+									}}
+								>
+									{item.label}
+								</TableCell>
 								<TableCell>
 									<Button
 										raised

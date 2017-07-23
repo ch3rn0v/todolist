@@ -25,6 +25,15 @@ body,
 	width: 100%;
 }
 
+.todo-done {
+	color: #999999;
+	text-decoration: line-through;
+}
+
+.todo-label {
+	cursor: pointer;
+}
+
 .filter-tabs {
 	background-color: #f5f5f5;
 	/* box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14),
