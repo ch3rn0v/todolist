@@ -5,7 +5,6 @@ import {
 	addNewItemToArray,
 	removeItemFromArray,
 	toggleItemStatus,
-	saveToggledItemStatusInArray,
 	setItemNewSyncStatusInArray
 } from '../lib/todoHelpers';
 import { loadTodos, createTodo, saveTodo, destroyTodo } from '../lib/todoService';
@@ -43,12 +42,9 @@ export class List extends React.Component {
 
 	onTodoStatusChange = (itemToBeChanged) => {
 		const itemWithNewStatus = toggleItemStatus(itemToBeChanged);
-		this.setState({
-			todos: saveToggledItemStatusInArray(this.state.todos, itemWithNewStatus)
-		});
-		this.setServerSyncStatus(itemWithNewStatus, 'in-process');
+		this.setServerSyncStatus(itemToBeChanged, 'in-process');
 		saveTodo(itemWithNewStatus).then((res) => {
-			this.setServerSyncStatus(itemWithNewStatus, 'synced');
+			this.setServerSyncStatus(itemToBeChanged, 'synced');
 			setTimeout(() => {
 				this.setServerSyncStatus(itemWithNewStatus, '');
 			}, SERVER_SYNC_STATUS_RESET_DURATION);
