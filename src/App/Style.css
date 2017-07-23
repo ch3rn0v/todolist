@@ -25,7 +25,7 @@ body,
 	width: 100%;
 }
 
-.todo-done {
+.todo-done > .todo-label {
 	color: #999999;
 	text-decoration: line-through;
 }
