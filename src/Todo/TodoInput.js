@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { validateText, createNewItem } from '../lib/todoHelpers';
 import { ErrorList } from './ErrorList';
 
-import Paper from 'material-ui/Paper';
+import Grid from 'material-ui/Grid';
+import Card, { CardContent } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import FormHelperText from 'material-ui/Form/FormHelperText';
@@ -43,29 +44,37 @@ export class TodoInput extends React.Component {
 		const errorPresent = errorList.length > 0;
 
 		return (
-			<Paper className="panel input" elevation={4}>
-				<form onSubmit={this.handleSubmit} className="todo-form">
-					<TextField
-						label="Enter new Todo item"
-						className="text-input"
-						onChange={this.handleChange}
-						value={inputText}
-						error={errorPresent}
-					/>
-					<Button
-						raised
-						color="primary"
-						className="button"
-						type="submit"
-						disabled={!(inputText.length > 0 && errorList.length === 0)}
-					>
-						Add item
-					</Button>
-				</form>
-				<FormHelperText error>
-					<ErrorList errorList={errorList} />
-				</FormHelperText>
-			</Paper>
+			<Card className="panel">
+				<CardContent>
+					<form onSubmit={this.handleSubmit} className="todo-form">
+						<Grid container direction="row" justify="flex-start" align="center" gutter={16}>
+							<Grid item xs={12} md={3}>
+								<TextField
+									label="Enter new Todo item"
+									className="text-input"
+									onChange={this.handleChange}
+									value={inputText}
+									error={errorPresent}
+								/>
+							</Grid>
+							<Grid item xs={12} md={3}>
+								<Button
+									raised
+									color="primary"
+									className="button"
+									type="submit"
+									disabled={!(inputText.length > 0 && errorList.length === 0)}
+								>
+									Add item
+								</Button>
+							</Grid>
+						</Grid>
+					</form>
+					<FormHelperText error>
+						<ErrorList errorList={errorList} />
+					</FormHelperText>
+				</CardContent>
+			</Card>
 		);
 	}
 }

@@ -1,25 +1,32 @@
 body {
 	font-family: 'Roboto', Arial, sans-serif;
+	background-color: #fcfcfc;
 }
 
 html,
-body {
+body,
+#root,
+.grid-root {
 	margin: 0;
 	padding: 0;
 	height: 100%;
+	max-width: 100%;
+}
+
+#root > div {
+	margin: 0 auto;
 }
 
 .panel {
-	padding-top: 0;
-	padding-bottom: 16px;
+	margin: 16px 0 16px;
 }
 
-.panel + .input {
-	padding-top: 16px;
+.text-input {
+	width: 100%;
 }
 
 .filter-tabs {
 	background-color: #f5f5f5;
-	box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14),
-		0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+	/* box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+		0px 1px 10px 0px rgba(0, 0, 0, 0.12); */
 }
