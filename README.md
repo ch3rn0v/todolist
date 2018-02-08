@@ -22,6 +22,8 @@ Its contents should look like this:
   ]
 }
 ```
+The `"todos"` array can be empty, but it must be present.
+
 
 ### Starting-up Instructions
 1. Run `json-server -p 8080 -w db.json` in order to start json-server on port 8080 and make it watch the changes to the db.json file.
