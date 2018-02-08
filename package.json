@@ -11,7 +11,7 @@
     "gh-pages": "^1.0.0",
     "material-ui": "^1.0.0-alpha.22",
     "material-ui-icons": "^1.0.0-alpha.19",
-    "mathjs": "^3.13.3",
+    "mathjs": "^3.17.0",
     "react-scripts": "1.0.7",
     "react-swipeable-views": "^0.12.4",
     "typeface-roboto": "0.0.31"
