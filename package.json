@@ -3,17 +3,18 @@
   "version": "0.1.5",
   "private": true,
   "dependencies": {
-    "prettier": "^1.5.2",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "npm": "^6.0.1",
+    "prettier": "^1.12.1",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2"
   },
   "devDependencies": {
-    "gh-pages": "^1.0.0",
-    "material-ui": "^1.0.0-alpha.22",
-    "material-ui-icons": "^1.0.0-alpha.19",
+    "gh-pages": "^1.1.0",
+    "material-ui": "^1.0.0-beta.47",
+    "material-ui-icons": "^1.0.0-beta.36",
     "mathjs": "^3.17.0",
     "react-scripts": "1.0.7",
-    "react-swipeable-views": "^0.12.4",
+    "react-swipeable-views": "^0.12.13",
     "typeface-roboto": "0.0.31"
   },
   "scripts": {
